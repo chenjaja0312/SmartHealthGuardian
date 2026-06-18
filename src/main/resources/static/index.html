@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Health Guardian</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="page">
+    <header class="hero">
+        <div>
+            <p class="eyebrow">Decision Tree + Health Log</p>
+            <h1>Smart Health Guardian 🌿</h1>
+            <p class="subtitle">Track your sleep, steps, and mood. Get your daily health risk level instantly.</p>
+        </div>
+        <div id="riskBadge" class="risk-badge neutral">Loading...</div>
+    </header>
+
+    <main class="grid">
+        <section class="card">
+            <h2>Analyze My Health Today</h2>
+            <form id="logForm">
+                <label>
+                    Date
+                    <input type="date" id="logDate" required />
+                </label>
+                <label>
+                    Sleep Hours
+                    <input type="number" id="sleepHours" min="0" max="24" step="0.1" placeholder="Example: 7.5" required />
+                </label>
+                <label>
+                    Steps
+                    <input type="number" id="steps" min="0" step="1" placeholder="Example: 6500" required />
+                </label>
+                <label>
+                    Mood Score: <span id="moodValue">6</span>/10
+                    <input type="range" id="moodScore" min="1" max="10" value="6" />
+                </label>
+                <button type="submit">Save & Classify Risk</button>
+            </form>
+            <p id="formMessage" class="message"></p>
+        </section>
+
+        <section class="card">
+            <h2>Decision Tree Logic</h2>
+            <div class="tree-box">
+                <p>Sleep Hours</p>
+                <p>↓</p>
+                <p>Steps</p>
+                <p>↓</p>
+                <p>Mood Score</p>
+                <p>↓</p>
+                <p><strong>Risk Level: Low / Medium / High</strong></p>
+            </div>
+        </section>
+
+        <section class="card decision-card wide-card">
+            <h2>Latest Decision Tree Result</h2>
+            <p id="riskMessage" class="risk-message">The latest risk result will appear here.</p>
+            <ol id="decisionPath" class="decision-path"></ol>
+        </section>
+    </main>
+
+
+    <section class="card full-card bonus-card">
+        <div class="table-header">
+            <div>
+                <p class="eyebrow">Bonus: Information Gain</p>
+                <h2>C4.5-style Feature Check</h2>
+            </div>
+            <button id="gainBtn" class="secondary">Analyze Seed Data</button>
+        </div>
+        <p id="gainSummary" class="risk-message">Click analyze to calculate entropy and information gain from the current health_logs data.</p>
+        <div id="gainCards" class="gain-grid"></div>
+    </section>
+
+    <section class="card full-card">
+        <div class="table-header">
+            <h2>Health Log History</h2>
+            <button id="refreshBtn" class="secondary">Refresh</button>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Sleep</th>
+                    <th>Steps</th>
+                    <th>Mood</th>
+                    <th>Risk</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody id="logTable"></tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
